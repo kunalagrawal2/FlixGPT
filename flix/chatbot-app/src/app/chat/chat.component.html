@@ -1,0 +1,22 @@
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let message of messages" 
+         [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}"
+         class="message">
+      <span>{{ message.text }}</span>
+      <div *ngIf="message.recommendations" class="recommendations">
+        <div *ngFor="let rec of message.recommendations" class="recommendation">
+          <h3>{{ rec.movie }}</h3>
+          <p>{{ rec.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="input-area">
+    <input type="text" 
+           [(ngModel)]="newMessage" 
+           (keyup.enter)="sendMessage()"
+           placeholder="Type a message...">
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
